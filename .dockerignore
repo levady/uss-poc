@@ -1,0 +1,38 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore local env
+.env
+.env.*
+
+# Ignore vendor/bundle
+vendor/bundle
+vendor/cache
+
+# Ignore node modules
+/public/assets
+/public/packs
+/public/packs-test
+node_modules
+yarn-error.log
+
+# Misc
+.rspec
+
+# Dockerfiles
+.dockerignore
+Dockerfile
+Dockerfile.*
+
+# git
+.gitignore
+.gitmodules
