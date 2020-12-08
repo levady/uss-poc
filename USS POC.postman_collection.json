@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "3d1163bb-a0b9-4db6-8a0f-e8cd9ad2df72",
+		"name": "USS POC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "retrieve all rides wait time",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{basic_auth_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{basic_auth_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/v1/rides.json",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"rides.json"
+					]
+				},
+				"description": "retrieve rides estimated wait time"
+			},
+			"response": []
+		},
+		{
+			"name": "submit visitors count",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{basic_auth_user}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{basic_auth_password}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"visitor\": {\n        \"sensor_code\": \"ride-1\",\n        \"visitors_count\": 22,\n        \"collected_at\": \"2020-12-08T14:28:24+0000\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/visitors.json",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"visitors.json"
+					]
+				},
+				"description": "submit the number of visitor coming in or out of a ride"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
