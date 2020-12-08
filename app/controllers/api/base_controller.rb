@@ -1,5 +1,7 @@
 module Api
   class BaseController < ActionController::Base
+    skip_before_action :verify_authenticity_token
+    
     before_action :basic_authenticate
 
     rescue_from ActiveRecord::RecordNotFound do
