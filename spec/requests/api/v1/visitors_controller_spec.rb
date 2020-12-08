@@ -8,18 +8,7 @@ RSpec.describe Api::V1::VisitorsController, type: :request do
   
   describe "POST create" do
     context "basic authenticated" do
-      let(:auth) do
-        ActionController::HttpAuthentication::Basic.encode_credentials("username", "secure")
-      end
-      let(:headers) { { "HTTP_AUTHORIZATION" => auth } }
-
-      around do |example|
-        ENV["BASIC_AUTH_USER"] = "username"
-        ENV["BASIC_AUTH_PASSWORD"] = "secure"
-        example.run
-        ENV["BASIC_AUTH_USER"] = nil
-        ENV["BASIC_AUTH_PASSWORD"] = nil
-      end
+      include_context :basic_auth_context
 
       it "return 200 OK on success" do
         payload = { visitor: { sensor_code: ride.sensor_code, visitors_count: 2, collected_at: current_time }}

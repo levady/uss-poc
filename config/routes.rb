@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       scope format: true, constraints: { format: :json } do
         resources :visitors, only: %i[ create ]
+        resources :rides, only: %i[ index ]
       end
     end
   end
