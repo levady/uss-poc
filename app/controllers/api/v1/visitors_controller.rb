@@ -1,17 +1,14 @@
 module Api
   module V1
+    # TODO: use metal controller
     class VisitorsController < ::Api::BaseController
       def create
-        VisitorDataCollector.new(
+        VisitorWorker.perform_async(
           create_params[:sensor_code],
           create_params[:visitors_count],
           create_params[:collected_at]
-        ).run!
+        )
         head :ok
-      rescue ActiveRecord::RecordNotFound
-        head :internal_server_error
-      rescue ActiveModel::ValidationError => e
-        render_validation_error(e)
       end
 
     private

@@ -3,11 +3,32 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     ports:
       - "15432:5432"
     env_file:
       - '.env'
+  
+  redis:
+    image: redis:6-alpine
+    command: redis-server
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+  
+  sidekiq:
+    depends_on:
+      - db
+      - redis
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/uss-rides
+      - '/project/tmp'
+    env_file:
+      - '.env'
+
   app:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -19,3 +40,8 @@ services:
       - '.env'
     depends_on:
       - db
+      - redis
+
+volumes:
+  redis:
+  postgres:
